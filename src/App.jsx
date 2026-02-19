@@ -3,6 +3,7 @@ import { useState, useRef, useCallback } from "react";
 // ── Components ────────────────────────────────────────────────────────────────
 import AdminToolbar  from "./components/AdminToolbar";
 import BannerPreview from "./components/BannerPreview";
+import InfoPanel     from "./components/InfoPanel";
 
 // ── Hooks ─────────────────────────────────────────────────────────────────────
 import { useBannerDrag } from "./hooks/useBannerDrag";
@@ -55,9 +56,15 @@ export default function App() {
   // ── Toolbar actions ───────────────────────────────────────────────────────
   const [isDownloading, setIsDownloading] = useState(false);
 
+  const handleReset = useCallback(() => {
+    resetPos();
+    set("shadowPos", 0);
+  }, [resetPos, set]);
+
   const handleBatchDownload = useCallback(async () => {
     setIsDownloading(true);
     try {
+      // Dynamically inject html2canvas from CDN if not already loaded
       if (typeof window.html2canvas === "undefined") {
         await new Promise((resolve, reject) => {
           const script = document.createElement("script");
@@ -68,11 +75,14 @@ export default function App() {
         });
       }
       const canvas = await window.html2canvas(canvasRef.current, {
-        scale: 1, useCORS: true, allowTaint: true, backgroundColor: null,
+        scale: 1,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
       });
       const link = document.createElement("a");
       link.download = `banner_${state.size}.png`;
-      link.href = canvas.toDataURL("image/png", 1.0);
+      link.href = canvas.toDataURL("image/png", state.exportQuality);
       link.click();
     } catch (err) {
       console.error("Download failed:", err);
@@ -80,11 +90,11 @@ export default function App() {
     } finally {
       setIsDownloading(false);
     }
-  }, [state.size]);
+  }, [state.size, state.exportQuality]);
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
-    <div style={{ fontFamily: '"Open Sans", sans-serif', fontSize: 14, background: "#f1f5f9", minHeight: "10vh" }}>
+    <div style={{ fontFamily: '"Open Sans", sans-serif', fontSize: 14, background: "#f1f5f9", minHeight: "100vh" }}>
       {/* Google Font */}
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&display=swap');`}</style>
 
@@ -92,6 +102,7 @@ export default function App() {
       <AdminToolbar
         state={state}
         set={set}
+        onReset={handleReset}
         onDownload={handleBatchDownload}
         isDownloading={isDownloading}
       />
@@ -113,6 +124,9 @@ export default function App() {
         onRemoveLogo2={() => set("showLogo2", false)}
         onRemoveQr={()    => set("showQr",    false)}
       />
+
+      {/* Hints + restore buttons */}
+      <InfoPanel state={state} set={set} />
 
       {/* Hidden file input managed by useFileUpload */}
       {FileInput}
