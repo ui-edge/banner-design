@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/banner-design/static/css/main.e6c13ad2.css",
+    "main.js": "/banner-design/static/js/main.9486bd5e.js",
+    "static/js/453.e85ee284.chunk.js": "/banner-design/static/js/453.e85ee284.chunk.js",
+    "index.html": "/banner-design/index.html",
+    "main.e6c13ad2.css.map": "/banner-design/static/css/main.e6c13ad2.css.map",
+    "main.9486bd5e.js.map": "/banner-design/static/js/main.9486bd5e.js.map",
+    "453.e85ee284.chunk.js.map": "/banner-design/static/js/453.e85ee284.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.9486bd5e.js"
+  ]
+}
