@@ -25,7 +25,7 @@ export const DRAG_THRESHOLD = 5;
 // ─── Default banner state ─────────────────────────────────────────────────────
 export const DEFAULT_STATE = {
   size:          "size-3000x340",
-  themeColor:    "#1a2439",
+  themeColor:    "#c6e0e8",
   textColor:     "#ffffff",
   shadowPos:     0,
   logoBg1:       "#ffffff",

@@ -26,7 +26,7 @@ export default function BannerImageArea({
   const horiz = isHorizontal(size);
 
   const containerStyle = horiz
-    ? { width: "50%", height: "100%", position: "relative", background: "#000", overflow: "hidden" }
+    ? { width: "50%", height: "100%", position: "relative", background: "#c6e0e8", overflow: "hidden" }
     : { width: "100%", height: 287, position: "relative", background: "none", top: 1, overflow: "hidden" };
 
   const gradientStyle = horiz
@@ -63,7 +63,7 @@ export default function BannerImageArea({
           height:             "100%",
           backgroundImage:    bgImage
             ? `url('${bgImage}')`
-            : "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
+            : "#c6e0e8",
           
           backgroundPosition: `${bgPos.x}% ${bgPos.y}%`,
           backgroundRepeat:   "no-repeat",
