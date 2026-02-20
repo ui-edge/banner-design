@@ -63,7 +63,7 @@ export default function BannerImageArea({
           height:             "100%",
           backgroundImage:    bgImage
             ? `url('${bgImage}')`
-            : "#c6e0e8",
+            : `url('https://www.ieplads.com/mailers/2026_ui/99acres/banner-14jan/images/property.png')`,
           
           backgroundPosition: `${bgPos.x}% ${bgPos.y}%`,
           backgroundRepeat:   "no-repeat",
